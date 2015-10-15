@@ -50,15 +50,23 @@ namespace ChartJs.Mvc.Extensions
             return CreateChart(canvasId, simpleChart.ChartType.ToString(), simpleChart.Data.ToJson(), simpleChart.ChartConfiguration.ToJson());
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="canvasId"></param>
+        /// <param name="chartType"></param>
+        /// <param name="jsonData"></param>
+        /// <param name="jsonOptions"></param>
+        /// <returns></returns>
         private static MvcHtmlString CreateChart(string canvasId, string chartType, string jsonData, string jsonOptions)
         {
             var tag = new TagBuilder("script");
             tag.Attributes.Add("type", "text/javascript");
             var stringBuilder = new StringBuilder();
-            stringBuilder.AppendFormat("var ctx = document.getElementById(\"{0}\").getContext(\"2d\");", canvasId);
+            // stringBuilder.AppendFormat("var ctx = document.getElementById(\"{0}\").getContext(\"2d\");", canvasId);
             stringBuilder.AppendFormat("var data = JSON.parse('{0}');", jsonData);
             stringBuilder.AppendFormat("var options = JSON.parse('{0}');", jsonOptions);
-            stringBuilder.AppendFormat("var {0}_chart = new Chart(ctx).{1}(data, options)", canvasId, chartType);
+            // stringBuilder.AppendFormat("var {0}_chart = new Chart(ctx).{1}(data, options)", canvasId, chartType);
             tag.InnerHtml = stringBuilder.ToString();
             return new MvcHtmlString(tag.ToString());
         }
